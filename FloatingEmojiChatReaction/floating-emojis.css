@@ -1,0 +1,23 @@
+livelike-chat {
+  display: block;
+  position: relative;
+  height: 100%;
+}
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    bottom: 10%;
+  }
+  100% {
+    opacity: 0;
+    bottom: 100%;
+  }
+}
+.floater {
+  height: 25px;
+  width: 25px;
+  background: transparent;
+  border-radius: 50%;
+  position: absolute;
+  animation-name: floatUp;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>LiveLike Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap core CSS -->
+  <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+
+<body>
+  <style></style>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://unpkg.com/@livelike/engagementsdk@2.15.0/livelike.umd.dev.js"></script>
+
+  <main class="app">
+    <!-- video -->
+    <div class="column one">
+      <section class="video-container">
+        <video controls="controls" autoplay muted loop>
+        </video>
+      </section>
+    </div>
+
+    <!-- right panel -->
+    <div id="right-panel" class="column two">
+      <header class="main-header">
+        <div class="logo"><img src="assets/images/logo.svg" /></div>
+        <div class="actions">
+          <a class="profile profile-wrap">
+            <div data-toggle="modal" data-target="#my-profile">
+              <img src="assets/images/pic_defaultAvatar.svg" id="my-profile-image" />
+            </div>
+            <div class="profile-stats"></div>
+          </a>
+        </div>
+      </header>
+
+      <div class="widget-container">
+        <livelike-widgets id="pop-up"></livelike-widgets>
+      </div>
+
+      <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="public-chat-tab" data-toggle="tab" href="#public-chat" role="tab"
+            aria-controls="public-chat" aria-selected="true">LIVE CHAT</a>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="public-chat" role="tabpanel" aria-labelledby="public-chat">
+          <livelike-chat id="public" messagemenus showavatar>
+            <div slot="message-list-empty">
+              <h1 style="color: white;">
+                No messages yet. Send the first one!
+              </h1>
+            </div>
+          </livelike-chat>
+          <livelike-widgets id="cheer-widget-container"></livelike-widgets>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- my profile -->
+  <div class="modal fade" id="my-profile" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">My Profile</div>
+        <div class="modal-body">
+          <!-- side content -->
+          <div class="form">
+            <label class="profile-label" for="profileNickname">Nickname</label>
+            <input id="profileNickname" class="custom-input" />
+
+            <label class="profile-label" for="profileAvatar">Avatar</label>
+            <div id="profileAvatar">
+              <div class="avatar-wrap">
+                <img id="avatarImage" src="assets/images/bluerobot.png" />
+              </div>
+              <div class="avatar-wrap">
+                <img id="avatarImage" src="assets/images/redrobot.png" />
+              </div>
+              <div class="avatar-wrap">
+                <img id="avatarImage" src="assets/images/blackrobot.png" />
+              </div>
+              <div class="avatar-wrap">
+                <img id="avatarImage" src="assets/images/yellowrobot.png" />
+              </div>
+            </div>
+          </div>
+
+          <span id="profile-res" class="text-center request-result-message"></span>
+        </div>
+        <div class="modal-footer">
+          <button id="updateNickname" data-dismiss="modal" class="btn btn-primary btn-block">
+            Update
+          </button>
+          <button type="button" data-dismiss="modal" class="btn btn-block" style="color: #fff;">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- room switcher -->
+  <div class="modal fade" id="room-switcher" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">Select Chat Room</div>
+        <div class="modal-body">
+          <!-- side content -->
+          <div class="chat-list-wrap">
+            <ul id="chat-list"></ul>
+            <label class="profile-label" for="chatTitleInput">Create Chat room</label>
+            <input id="chatTitleInput" class="custom-input" placeholder="Add chat room title" />
+            <span id="chat-res" class="request-result-message"></span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="createChatButton" data-dismiss="modal" class="btn btn-primary btn-block">
+            Create
+          </button>
+          <button type="button" data-dismiss="modal" class="btn btn-block" style="color: #fff;">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/dist/js/jquery.min.js"></script>
+  <script src="assets/dist/js/bootstrap.js"></script>
+  <script src="shared.js"></script>
+  <script src="floating-emojis.js"></script>
+  <link rel="stylesheet" href="custom-chat.css" />
+  <link rel="stylesheet" href="floating-emojis.css" />
+
+</body>
+
+
+<template kind="cheer-meter" id="floating-emojis">
+  <livelike-select class="floating-emojis">
+    <template>
+      <livelike-option>
+        <livelike-vote-count></livelike-vote-count>
+        <livelike-image height="30px" width="30px"></livelike-image>
+      </livelike-option>
+    </template>
+  </livelike-select>
+</template>
